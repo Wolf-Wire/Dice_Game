@@ -1,0 +1,87 @@
+/* Play the dice game, where each user chooses the Red, Green or Blue die.
+ * 
+ * Dice Game
+ * This program asks user(s) to enter their chosen die for two players, they can choose between R(ed), G(reen), or B(lue). 
+ * The dice are not fair and each die has its own unique structure which will be printed out when the game starts.
+ * The program then uses a while loop 50 times to randomly find the winner between the two and keeps track of scores.
+ * The last line printed by the program shows the final score and therfore, the winner.
+ * The detail of variable, commands and functions can be find next to them below
+ */
+#include <iostream>   // For cin and cout
+#include <iomanip>    // For formatted output using setw()
+#include <cstdlib>    // Needed for rand() to work
+
+using namespace std;
+
+int main()  // the main function which first prints the identifying statements along with the game description
+{                                                               // then it prompts the user to enter the input
+  cout << "Class: CS 141" << endl;
+  cout << "Lab: Tues 5am" << endl;
+  cout << "System:  C++ in codio.com" << endl;
+  cout << "Welcome to the dice game, where you and your opponent each choose" << endl;
+  cout << "one of the red, green or blue dice and roll them." << endl;
+  cout << endl;
+  cout << "The dice contain the following sides:" << endl;
+  cout << setw (20) << "Red: 1 4 4 4 4 4" << endl;
+  cout << setw (20) << "Green: 2 2 2 5 5 5" << endl;    
+  cout << setw (20) << "Blue: 6 3 3 3 3 3" << endl;    
+  cout << endl;
+  cout << "Enter the die colors (R G or B): " ;	
+  
+  int R [6] = {1, 4, 4, 4, 4, 4} ;    // defining the dice, initials for each color
+  int G [6] = {2, 2, 2, 5, 5, 5} ;    // with a unique set for each die defined as 
+  int B [6] = {6, 3, 3, 3, 3, 3} ;    // arrays of six with constant values.
+  //*** Lin: Too many blank lines here.
+
+  char die1 = ' ';    // Defining and initializing each variable with an empty space.
+  char die2 = ' ';    // Tow variables are die1 and die2 which correspond to player1 and player2.
+  
+  cin >> die1 >> die2;        // prompting the user(s) to enter the input.
+  
+  int p1Score = 0;    // Defining and initializing scores for each player to zero.
+  int p2Score = 0;    // all the variables' names with "1" correspond with player1, true for "2" and player2.
+  
+  int loop = 1;       // adding the while loop and setting it for 50 times, initializing at 1.
+  while (loop < 51) {
+     
+     int value1 = rand() % 6;      // Using rand() function and % of 6 to choose a random value (0-5).
+     int value2 = rand() % 6;      // Calling the rand() a second time to the same for die2 independantly. 
+     
+     int player1 = 0;   // Introducing player1 and exploring his options with three else if statements, one for each die.
+     if (die1 == 'R') {
+        player1 = R[value1];
+     }
+     else if (die1 == 'G') {
+        player1 = G[value1];
+     }  
+     else {
+        player1 = B[value1];
+     }
+
+     int player2 = 0;   // Introducing player2 and exploring his options with three else if statements, one for each die.
+     if (die2 == 'R') {
+        player2 = R[value2];
+     }
+     else if (die2 == 'G') {
+        player2 = G[value2];
+     }  
+     else {
+        player2 = B[value2];
+     }
+
+     if (player1 > player2) {         // Determining the game result for each time by checking who got the higher socre 
+        p1Score = p1Score + 1;        // using an if-else statement and incrementing the winner's score by one.
+     }
+     else {
+        p2Score = p2Score + 1;
+     }
+                       // the visible part of the loop which states the result for each round and keeps track of the score.
+     cout << setw(2) << loop << ". " << die1 << ':' << player1 << " " << die2 << ':' << player2 << ", Score: " << setw(2) << p1Score << " to " << setw(2) << p2Score <<endl;
+	   loop = loop + 1;  // incrementing the loop by 1
+  }  
+  return 0;
+}            //end main()
+
+                            /*******************************************
+                             * * * * * *  Author: Nick Wolf  * * * * * * 
+                             *******************************************/
